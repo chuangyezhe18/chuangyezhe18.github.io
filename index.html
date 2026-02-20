@@ -3,87 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的作品集 | 18岁编程学习者</title>
+    <title>我的作品集 | 马欣雨</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft Yahei", sans-serif;
+            font-family: "Microsoft YaHei", sans-serif;
         }
         body {
-            background-color: #f5f7fa;
+            background-color: #f8f9fa;
             color: #333;
+            line-height: 1.6;
+            padding: 20px;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 50px;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             background-color: #3498db;
             color: white;
-            font-size: 48px;
-            line-height: 120px;
+            font-size: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0 auto 20px;
+            overflow: hidden;
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         h1 {
-            font-size: 28px;
+            text-align: center;
+            font-size: 36px;
             margin-bottom: 10px;
         }
         .title-desc {
+            text-align: center;
+            font-size: 18px;
             color: #666;
-            font-size: 16px;
+            margin-bottom: 30px;
         }
         section {
-            background-color: white;
+            background: white;
             border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-        h2 {
-            font-size: 22px;
-            color: #2c3e50;
+            padding: 20px;
             margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-            padding-left: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        section h2 {
+            font-size: 28px;
+            color: #2c3e50;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-bottom: 20px;
         }
         .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
         .skill-tag {
-            background-color: #eaf4ff;
-            color: #3498db;
+            background-color: #e3f2fd;
+            color: #0288d1;
             padding: 8px 16px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 16px;
         }
         .project-item {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        .project-title {
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 6px;
+        .project-item h3 {
+            font-size: 22px;
+            color: #2c3e50;
+            margin-bottom: 5px;
         }
-        .project-desc {
+        .project-item p {
             color: #666;
-            font-size: 14px;
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            font-size: 16px;
         }
         .contact-item {
             color: #3498db;
@@ -100,43 +107,44 @@
 <body>
     <div class="container">
         <header>
-            <div class="avatar">我</div>
-            <h1>18岁编程学习者</h1>
-            <p class="title-desc">正在学习 HTML + CSS + JavaScript，目标是靠技术赚钱</p>
+            <div class="avatar">
+                <img src="https://raw.githubusercontent.com/chuangyezhe18/chuangyezhe18.github.io/main/mmexport1771248777155.jpg" alt="头像">
+            </div>
+            <h1>马欣雨</h1>
+            <p class="title-desc">十中学生</p>
         </header>
 
         <section>
             <h2>我的技能</h2>
             <div class="skill-list">
-                <div class="skill-tag">HTML</div>
-                <div class="skill-tag">CSS</div>
-                <div class="skill-tag">JavaScript</div>
-                <div class="skill-tag">AI辅助开发</div>
+                <div class="skill-tag">吃饭</div>
+                <div class="skill-tag">睡觉</div>
+                <div class="skill-tag">打游戏</div>
+                <div class="skill-tag">追星</div>
             </div>
         </section>
 
         <section>
-            <h2>我的项目</h2>
+            <h2>我的经历</h2>
             <div class="project-item">
-                <div class="project-title">个人主页</div>
-                <div class="project-desc">使用 HTML + CSS 制作的第一个网页，展示个人介绍和按钮交互</div>
+                <h3>个人成就</h3>
+                <p>会使用嘴巴吃饭</p>
             </div>
             <div class="project-item">
-                <div class="project-title">AI辅助开发</div>
-                <div class="project-desc">使用 AI 生成代码并进行修改，提升开发效率</div>
+                <h3>个人技能</h3>
+                <p>会利用鼻子呼吸</p>
             </div>
         </section>
 
         <section>
             <h2>联系我</h2>
-            <div class="contact-info">
-                <a href="#" class="contact-item">微信：xxx（可替换成你的）</a>
-                <a href="#" class="contact-item">邮箱：xxx@example.com（可替换成你的）</a>
-            </div>
+            <p>微信: <a href="yhbtxdy68" class="contact-item">yhbtxdy68</a></p>
+            <p>邮箱: <a href="没有" class="contact-item" target="_blank">没有</a></p>
         </section>
 
         <footer>
-            &copy; 2026 我的作品集 | 18岁，为未来努力
+            <p>&copy; 2026 我的个人简介 | 17岁，为未来努力
+</p>
         </footer>
     </div>
 </body>
