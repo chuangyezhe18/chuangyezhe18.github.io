@@ -14,8 +14,22 @@
         body {
             background-color: #f8f9fa;
             color: #333;
-            line-height: 1.6;
+            overflow: hidden;
+        }
+        .swiper-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+        .page {
+            min-width: 100vw;
+            height: 100vh;
+            overflow-y: auto;
             padding: 20px;
+            scroll-snap-align: start;
         }
         .container {
             max-width: 800px;
@@ -68,12 +82,12 @@
             padding-left: 15px;
             margin-bottom: 20px;
         }
-        .skill-list {
+        .skill-list, .hobby-list {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
-        .skill-tag {
+        .skill-tag, .hobby-item {
             background-color: #e3f2fd;
             color: #0288d1;
             padding: 8px 16px;
@@ -102,50 +116,255 @@
             font-size: 14px;
             margin-top: 40px;
         }
+        .indicators {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ccc;
+        }
+        .indicator.active {
+            background-color: #3498db;
+        }
+        /* 留言板样式 */
+        #message-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            resize: none;
+        }
+        #submit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .message-item {
+            background-color: #f5f7fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        /* 时间线样式 */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid #3498db;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #3498db;
+        }
+        .timeline-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .timeline-content {
+            background-color: #f5f7fa;
+            padding: 10px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="avatar">
-                <img src="https://chuangyezhe18.github.io/mmexport1771248777155.jpg" alt="头像">
-            </div>
-            <h1>马欣雨</h1>
-            <p class="title-desc">十中学生</p>
-        </header>
+    <div class="swiper-container">
+        <!-- 页面1：个人主页 -->
+        <div class="page" id="page1">
+            <div class="container">
+                <header>
+                    <div class="avatar">
+                        <img src="https://chuangyezhe18.github.io/mmexport1771248777155.jpg" alt="头像">
+                    </div>
+                    <h1>马欣雨</h1>
+                    <p class="title-desc">十中学生</p>
+                </header>
 
-        <section>
-            <h2>我的优点</h2>
-            <div class="skill-list">
-                <div class="skill-tag">可爱</div>
-                <div class="skill-tag">性格好</div>
-                <div class="skill-tag">有趣</div>
-                <div class="skill-tag">聪明</div>
-            </div>
-        </section>
+                <section>
+                    <h2>我的优点</h2>
+                    <div class="skill-list">
+                        <div class="skill-tag">可爱</div>
+                        <div class="skill-tag">性格好</div>
+                        <div class="skill-tag">有趣</div>
+                        <div class="skill-tag">聪明</div>
+                    </div>
+                </section>
 
-        <section>
-            <h2>我的经历</h2>
-            <div class="project-item">
-                <h3>个人成就</h3>
-                <p>曾经在豆包中了2.26元</p>
-            </div>
-            <div class="project-item">
-                <h3>个人技能</h3>
-                <p>会流畅使用移动通信终端</p>
-            </div>
-        </section>
+                <section>
+                    <h2>我的经历</h2>
+                    <div class="project-item">
+                        <h3>个人成就</h3>
+                        <p>曾经在豆包中了2.26元</p>
+                    </div>
+                    <div class="project-item">
+                        <h3>个人技能</h3>
+                        <p>会流畅使用移动通信终端</p>
+                    </div>
+                </section>
 
-        <section>
-            <h2>联系我</h2>
-            <p>微信: <a href="yhbtxdy68" class="contact-item">yhbtxdy68</a></p>
-            <p>邮箱: <a href="没有" class="contact-item" target="_blank">没有</a></p>
-        </section>
+                <section>
+                    <h2>联系我</h2>
+                    <p>微信: <a href="weixin://yhbtxdy68" class="contact-item">yhbtxdy68</a></p>
+                    <p>邮箱: <span class="contact-item">没有</span></p>
+                </section>
 
-        <footer>
-            <p>&copy; 2026 我的个人简介 | 17岁，为未来努力
-</p>
-        </footer>
+                <footer>
+                    <p>&copy; 2026 我的个人简介 | 17岁，为未来努力</p>
+                </footer>
+            </div>
+        </div>
+
+        <!-- 页面2：我的日常 -->
+        <div class="page" id="page2">
+            <div class="container">
+                <h2>我的日常</h2>
+                <div class="hobby-list">
+                    <div class="hobby-item">🎧 最近在听：《小城夏天》</div>
+                    <div class="hobby-item">📖 正在读：《云边有个小卖部》</div>
+                    <div class="hobby-item">🎮 沉迷游戏：《原神》</div>
+                    <div class="hobby-item">🍜 最爱美食：火锅、奶茶</div>
+                </div>
+                <section style="margin-top: 20px;">
+                    <h3>我的小目标</h3>
+                    <ul>
+                        <li>✅ 学会做一道新菜</li>
+                        <li>📚 读完3本书</li>
+                        <li>✈️ 去一次海边</li>
+                        <li>💻 掌握一个新技能</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <!-- 页面3：生活碎片 -->
+        <div class="page" id="page3">
+            <div class="container">
+                <h2>生活碎片</h2>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px;">
+                    <img src="https://chuangyezhe18.github.io/mmexport1771248777155.jpg" alt="照片1" style="width: 100%; border-radius: 8px; object-fit: cover;">
+                    <img src="https://chuangyezhe18.github.io/mmexport1771248777155.jpg" alt="照片2" style="width: 100%; border-radius: 8px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面4：成长时间线 -->
+        <div class="page" id="page4">
+            <div class="container">
+                <h2>我的成长时间线</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023年9月</div>
+                        <div class="timeline-content">
+                            <h3>进入十中</h3>
+                            <p>成为一名中学生，开启新的旅程。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024年5月</div>
+                        <div class="timeline-content">
+                            <h3>第一次获奖</h3>
+                            <p>在学校作文比赛中获得二等奖。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025年10月</div>
+                        <div class="timeline-content">
+                            <h3>学会做第一道菜</h3>
+                            <p>成功做出了番茄炒蛋，味道还不错！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面5：留言板 -->
+        <div class="page" id="page5">
+            <div class="container">
+                <h2>给我留言</h2>
+                <textarea id="message-input" rows="3" placeholder="说点什么吧..."></textarea>
+                <button id="submit-btn" onclick="submitMessage()">发送</button>
+                <div id="message-board" style="margin-top: 20px;"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- 页面指示器 -->
+    <div class="indicators">
+        <div class="indicator active" onclick="goToPage(1)"></div>
+        <div class="indicator" onclick="goToPage(2)"></div>
+        <div class="indicator" onclick="goToPage(3)"></div>
+        <div class="indicator" onclick="goToPage(4)"></div>
+        <div class="indicator" onclick="goToPage(5)"></div>
+    </div>
+
+    <script>
+        const container = document.querySelector('.swiper-container');
+        const indicators = document.querySelectorAll('.indicator');
+
+        // 监听滑动，更新指示器
+        container.addEventListener('scroll', () => {
+            const pageIndex = Math.round(container.scrollLeft / window.innerWidth);
+            indicators.forEach((ind, i) => {
+                ind.classList.toggle('active', i === pageIndex);
+            });
+        });
+
+        // 点击指示器跳转到对应页面
+        function goToPage(index) {
+            const page = document.getElementById(`page${index}`);
+            page.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+        }
+
+        // 留言板功能
+        function submitMessage() {
+            const input = document.getElementById('message-input');
+            const message = input.value.trim();
+            if (message) {
+                const board = document.getElementById('message-board');
+                const div = document.createElement('div');
+                div.className = 'message-item';
+                div.textContent = message;
+                board.appendChild(div);
+                input.value = '';
+                // 保存到本地存储
+                const messages = JSON.parse(localStorage.getItem('messages') || '[]');
+                messages.push(message);
+                localStorage.setItem('messages', JSON.stringify(messages));
+            }
+        }
+
+        // 页面加载时恢复留言
+        window.onload = function() {
+            const messages = JSON.parse(localStorage.getItem('messages') || '[]');
+            const board = document.getElementById('message-board');
+            messages.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = 'message-item';
+                div.textContent = msg;
+                board.appendChild(div);
+            });
+        };
+    </script>
 </body>
 </html>
