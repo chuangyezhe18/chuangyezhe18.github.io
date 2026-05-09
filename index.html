@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -11,7 +10,7 @@ body{
   width:100vw;
   height:100vh;
   overflow:hidden;
-  /* 全景背景图设置 */
+  /* 替换成你的合照链接 */
   background: url("你的合照地址.jpg") center center / cover no-repeat fixed;
   display:flex;
   flex-direction:column;
@@ -21,7 +20,7 @@ body{
   text-align:center;
   position:relative;
 }
-/* 半透明黑遮罩，文字看得更清楚，氛围感更强 */
+/* 半透明暗遮罩，文字更清晰 */
 body::before{
   content:"";
   position:absolute;
@@ -40,6 +39,7 @@ body::before{
 h1{font-size:34px;margin-bottom:18px;text-shadow:0 2px 10px rgba(0,0,0,0.3)}
 p{font-size:19px;line-height:1.9;margin:10px 0;text-shadow:0 1px 4px rgba(0,0,0,0.2)}
 .time{margin-top:24px;font-size:15px;opacity:0.95}
+
 /* 爱心飘落 */
 .heart{
   position:absolute;
@@ -53,6 +53,15 @@ p{font-size:19px;line-height:1.9;margin:10px 0;text-shadow:0 1px 4px rgba(0,0,0,
   0%{transform:translateY(-10px) rotate(0deg);opacity:1}
   100%{transform:translateY(100vh) rotate(360deg);opacity:0}
 }
+
+/* 烟花画布铺满全屏 */
+#firework{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:10;
+}
 </style>
 </head>
 <body>
@@ -64,12 +73,14 @@ p{font-size:19px;line-height:1.9;margin:10px 0;text-shadow:0 1px 4px rgba(0,0,0,
   <p class="time">此页面，只为你一人存在 💌</p>
 </div>
 
+<!-- 烟花画布 -->
+<canvas id="firework"></canvas>
+
 <audio autoplay loop muted id="bgm">
   <source src="https://assets.mixkit.co/sfx/preview/mixkit-dreamy-night-time-piano-1213.mp3" type="audio/mpeg">
 
-
 <script>
-// 爱心飘落
+// 1. 爱心飘落
 function createHeart(){
   const heart=document.createElement('div');
   heart.className='heart';
@@ -81,12 +92,72 @@ function createHeart(){
 }
 setInterval(createHeart,150);
 
-// 点击页面播放音乐
+// 2. 点击播放音乐
 document.body.addEventListener('click',()=>{
   const audio=document.getElementById('bgm');
   audio.muted=false;
   audio.play();
 })
+
+// 3. 点击烟花特效
+const canvas = document.getElementById('firework');
+const ctx = canvas.getContext('2d');
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+window.addEventListener('resize',()=>{
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+})
+
+class Particle{
+  constructor(x,y,color,speed,angle,life){
+    this.x=x; this.y=y; this.color=color;
+    this.vx=Math.cos(angle)*speed;
+    this.vy=Math.sin(angle)*speed;
+    this.life=life; this.maxLife=life;
+  }
+  update(){
+    this.x+=this.vx;
+    this.y+=this.vy;
+    this.vy+=0.05;
+    this.life--;
+  }
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,2,0,Math.PI*2);
+    ctx.fillStyle=this.color;
+    ctx.globalAlpha=this.life/this.maxLife;
+    ctx.fill();
+  }
+}
+
+function createFirework(x,y){
+  const colors=['#ff6b8b','#ffd700','#7cf','#f9f'];
+  for(let i=0;i<60;i++){
+    const angle = (Math.PI*2/60)*i;
+    const color = colors[Math.floor(Math.random()*colors.length)];
+    new Particle(x,y,color,Math.random()*4+2,angle,60).update();
+    particles.push(new Particle(x,y,color,Math.random()*4+2,angle,60));
+  }
+}
+
+let particles=[];
+canvas.addEventListener('click',e=>{
+  createFirework(e.clientX,e.clientY);
+})
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    p.update(); p.draw();
+    if(p.life<=0) particles.splice(i,1);
+  }
+  requestAnimationFrame(animate);
+}
+animate();
 </script>
 </body>
 </html>
+
