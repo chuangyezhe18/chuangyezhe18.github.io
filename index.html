@@ -1,1 +1,92 @@
 
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>致我最爱的人</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑",sans-serif}
+body{
+  width:100vw;
+  height:100vh;
+  overflow:hidden;
+  /* 全景背景图设置 */
+  background: url("你的合照地址.jpg") center center / cover no-repeat fixed;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  text-align:center;
+  position:relative;
+}
+/* 半透明黑遮罩，文字看得更清楚，氛围感更强 */
+body::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  z-index:-1;
+}
+.box{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(12px);
+  padding:45px 35px;
+  border-radius:24px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.25);
+  max-width:90%;
+}
+h1{font-size:34px;margin-bottom:18px;text-shadow:0 2px 10px rgba(0,0,0,0.3)}
+p{font-size:19px;line-height:1.9;margin:10px 0;text-shadow:0 1px 4px rgba(0,0,0,0.2)}
+.time{margin-top:24px;font-size:15px;opacity:0.95}
+/* 爱心飘落 */
+.heart{
+  position:absolute;
+  color:#ff6b8b;
+  font-size:26px;
+  animation:fall linear infinite;
+  opacity:0.85;
+  pointer-events:none;
+}
+@keyframes fall{
+  0%{transform:translateY(-10px) rotate(0deg);opacity:1}
+  100%{transform:translateY(100vh) rotate(360deg);opacity:0}
+}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>致我独一无二的偏爱</h1>
+  <p>很幸运，茫茫人海遇见你</p>
+  <p>往后岁岁年年，朝夕四季</p>
+  <p>我都想和你一起</p>
+  <p class="time">此页面，只为你一人存在 💌</p>
+</div>
+
+<audio autoplay loop muted id="bgm">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-dreamy-night-time-piano-1213.mp3" type="audio/mpeg">
+
+
+<script>
+// 爱心飘落
+function createHeart(){
+  const heart=document.createElement('div');
+  heart.className='heart';
+  heart.innerHTML='♥';
+  heart.style.left=Math.random()*100+'vw';
+  heart.style.animationDuration=(Math.random()*3+4)+'s';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),7000);
+}
+setInterval(createHeart,150);
+
+// 点击页面播放音乐
+document.body.addEventListener('click',()=>{
+  const audio=document.getElementById('bgm');
+  audio.muted=false;
+  audio.play();
+})
+</script>
+</body>
+</html>
