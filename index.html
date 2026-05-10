@@ -3,15 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>致我最爱的人</title>
+<title>致我独一无二的偏爱</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑",sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"微软雅黑",sans-serif;}
 body{
   width:100vw;
   height:100vh;
   overflow:hidden;
-  /* 替换成你的合照链接 */
-background: url("https://cdn.jsdelivr.net/gh/MaXinYu1314/MaXinYu1314.github.io/IMG_20260510_075803.jpg") center center / cover no-repeat fixed;
+  background: url("https://cdn.jsdelivr.net/gh/MaXinYu1314/MaXinYu1314.github.io/IMG_20260510_075803.jpg") center center / cover no-repeat fixed;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -20,144 +19,123 @@ background: url("https://cdn.jsdelivr.net/gh/MaXinYu1314/MaXinYu1314.github.io/I
   text-align:center;
   position:relative;
 }
-/* 半透明暗遮罩，文字更清晰 */
+/* 半透明温柔遮罩，文字更清晰 */
 body::before{
   content:"";
   position:absolute;
-  inset:0;
+  width:100%;
+  height:100%;
   background:rgba(0,0,0,0.45);
-  z-index:-1;
+  z-index:1;
 }
+/* 中心文字卡片 */
 .box{
+  position:relative;
+  z-index:2;
   background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(12px);
-  padding:45px 35px;
-  border-radius:24px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.25);
-  max-width:90%;
+  backdrop-filter:blur(10px);
+  padding:60px 40px;
+  border-radius:28px;
+  max-width:85%;
 }
-h1{font-size:34px;margin-bottom:18px;text-shadow:0 2px 10px rgba(0,0,0,0.3)}
-p{font-size:19px;line-height:1.9;margin:10px 0;text-shadow:0 1px 4px rgba(0,0,0,0.2)}
-.time{margin-top:24px;font-size:15px;opacity:0.95}
-
-/* 爱心飘落 */
+h1{
+  font-size:42px;
+  margin-bottom:30px;
+  letter-spacing:3px;
+  text-shadow:0 0 12px rgba(255,100,150,0.6);
+}
+p{
+  font-size:24px;
+  margin:18px 0;
+  opacity:0.95;
+}
+.bottom{
+  margin-top:35px;
+  font-size:22px;
+}
+/* 飘落爱心 */
 .heart{
-  position:absolute;
-  color:#ff6b8b;
-  font-size:26px;
-  animation:fall linear infinite;
-  opacity:0.85;
+  position:fixed;
   pointer-events:none;
+  z-index:0;
+  animation:fall linear forwards;
 }
 @keyframes fall{
-  0%{transform:translateY(-10px) rotate(0deg);opacity:1}
-  100%{transform:translateY(100vh) rotate(360deg);opacity:0}
+  0%{transform:translateY(-5%) rotate(0deg);opacity:1;}
+  100%{transform:translateY(105vh) rotate(720deg);opacity:0;}
 }
-
-/* 烟花画布铺满全屏 */
-#firework{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  pointer-events:none;
-  z-index:10;
+/* 星光闪烁 */
+.star{
+  position:absolute;
+  background:#fff;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  0%{opacity:0.2;transform:scale(0.7);}
+  100%{opacity:1;transform:scale(1.1);}
 }
 </style>
 </head>
 <body>
 <div class="box">
   <h1>致我独一无二的偏爱</h1>
-  <p>很幸运，茫茫人海遇见你</p>
+  <p>很幸运，茫茫人海遇见你 💖</p>
   <p>往后岁岁年年，朝夕四季</p>
   <p>我都想和你一起</p>
-  <p class="time">此页面，只为你一人存在 💌</p>
+  <p class="bottom">此页面，只为你一人存在 💌</p>
 </div>
 
-<!-- 烟花画布 -->
-<canvas id="firework"></canvas>
-
-<audio autoplay loop muted id="bgm">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-dreamy-night-time-piano-1213.mp3" type="audio/mpeg">
-
 <script>
-// 1. 爱心飘落
+// 1. 自动飘落爱心
 function createHeart(){
-  const heart=document.createElement('div');
-  heart.className='heart';
-  heart.innerHTML='♥';
-  heart.style.left=Math.random()*100+'vw';
-  heart.style.animationDuration=(Math.random()*3+4)+'s';
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = Math.random()*22+12 + "px";
+  heart.style.animationDuration = Math.random()*6+4 + "s";
   document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),7000);
+  setTimeout(()=>heart.remove(),10000);
 }
-setInterval(createHeart,150);
+setInterval(createHeart,350);
 
-// 2. 点击播放音乐
-document.body.addEventListener('click',()=>{
-  const audio=document.getElementById('bgm');
-  audio.muted=false;
-  audio.play();
+// 2. 随机星光
+for(let i=0;i<60;i++){
+  const s = document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.width=s.style.height=Math.random()*3+1+"px";
+  s.style.animationDelay=Math.random()*2+"s";
+  document.body.appendChild(s);
+}
+
+// 3. 点击烟花效果（点空白处）
+document.addEventListener("click",e=>{
+  for(let i=0;i<22;i++){
+    const fire = document.createElement("div");
+    fire.style.position="fixed";
+    fire.style.left=e.clientX+"px";
+    fire.style.top=e.clientY+"px";
+    fire.style.width="10px";
+    fire.style.height="10px";
+    fire.style.borderRadius="50%";
+    fire.style.pointerEvents="none";
+    const color=["#ff5e99","#ffd700","#7cf","#f8f","#5ff"][Math.floor(Math.random()*5)];
+    fire.style.background=color;
+    const angle=(Math.PI*2/22)*i;
+    const dist=Math.random()*120+80;
+    fire.animate([
+      {transform:"scale(1)",opacity:1},
+      {transform:`translate(${Math.cos(angle)*dist}px,${Math.sin(angle)*dist}px) scale(0)`,opacity:0}
+    ],{duration:700,easing:"ease-out"});
+    document.body.appendChild(fire);
+    setTimeout(()=>fire.remove(),700);
+  }
 })
-
-// 3. 点击烟花特效
-const canvas = document.getElementById('firework');
-const ctx = canvas.getContext('2d');
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-
-window.addEventListener('resize',()=>{
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-})
-
-class Particle{
-  constructor(x,y,color,speed,angle,life){
-    this.x=x; this.y=y; this.color=color;
-    this.vx=Math.cos(angle)*speed;
-    this.vy=Math.sin(angle)*speed;
-    this.life=life; this.maxLife=life;
-  }
-  update(){
-    this.x+=this.vx;
-    this.y+=this.vy;
-    this.vy+=0.05;
-    this.life--;
-  }
-  draw(){
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,2,0,Math.PI*2);
-    ctx.fillStyle=this.color;
-    ctx.globalAlpha=this.life/this.maxLife;
-    ctx.fill();
-  }
-}
-
-function createFirework(x,y){
-  const colors=['#ff6b8b','#ffd700','#7cf','#f9f'];
-  for(let i=0;i<60;i++){
-    const angle = (Math.PI*2/60)*i;
-    const color = colors[Math.floor(Math.random()*colors.length)];
-    new Particle(x,y,color,Math.random()*4+2,angle,60).update();
-    particles.push(new Particle(x,y,color,Math.random()*4+2,angle,60));
-  }
-}
-
-let particles=[];
-canvas.addEventListener('click',e=>{
-  createFirework(e.clientX,e.clientY);
-})
-
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(let i=particles.length-1;i>=0;i--){
-    const p=particles[i];
-    p.update(); p.draw();
-    if(p.life<=0) particles.splice(i,1);
-  }
-  requestAnimationFrame(animate);
-}
-animate();
 </script>
 </body>
 </html>
+
 
